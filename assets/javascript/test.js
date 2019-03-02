@@ -6,5 +6,5 @@ var lookup = word2.indexOf("l")
 
 document.onkeydown = ({ key }) => {
     document.getElementById("myTest").innerHTML = key
-    showObj.letter.push(key)
+    showObj.guessArr.push(key)
   };
