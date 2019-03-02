@@ -1,7 +1,8 @@
 // Initialize variables 
-let word = 'rabbit'
+let word = 'Anderson'
+let letter = []
 let numGuesses = word.length
-let guesses = [1, 0, 1, 0, 0]
+let guesses = []
 let guessesLeft = word.length - guesses.length
 let winTotal
 let lossTotal
@@ -15,6 +16,7 @@ lossTotal = guesses.length - winTotal
 // Object to hold the information
 let showObj = {
     word: word,
+    letter: letter,
     guessLen: numGuesses,
     guessArr: guesses,
     guessLeft: guessesLeft,
@@ -29,7 +31,7 @@ document.getElementById("update").innerHTML = 'Wins: ' + showObj.wins;
 
 let str = 'hotdog'
 
-for (let i =0; i < str.length; i++) {
+for (let i =0; i < showObj.word.length; i++) {
     let thing = document.createElement('span')
     thing.textContent = ' _ ' // str[i]
     document.querySelector('#myDiv').append(thing)
