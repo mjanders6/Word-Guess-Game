@@ -23,13 +23,13 @@ let showObj = {
 document.onkeydown = ({ key }) => {
     showObj.guessArr.push(key)
     showObj.guessLeft = numGuesses - showObj.guessArr.length
+    document.getElementById("update").innerHTML = 'Guesses Left: ' + showObj.guessLeft;
 };
 
 // wins and losses 
 winTotal = wins(guesses)
 lossTotal = guesses.length - winTotal
 
-document.getElementById("update").innerHTML = 'Wins: ' + showObj.wins;
 
 
 let str = 'hotdog'
