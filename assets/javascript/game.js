@@ -22,28 +22,23 @@ let showObj = {
         // guesses left
         return this.guessLen() - this.guessArr.length
     },
-    // showWordArr() {
-    //     for (let i = 0; i < this.guessLen(); i++) {
-    //         if (this.word.match(this.guessArr[i])) {
-    //             let thing = document.createElement('span')
-    //             document.querySelector('#myDiv').append(thing)
-    //             thing.textContent = this.guessArr[i]
-    //         } else {
-                
-    //         }
-    //     }
-    // },
+    showWordArr() {
+        // trying to get this to show the word...
+        for (let j = 0; j < this.guessArr.length; j++) {
+            for (let i = 0; i < this.guessLen(); i++) {
+                if (this.word.match(this.guessArr[j]) != null) {
+                    showWord.splice(this.word.match(showObj.guessArr[i]).index, 0, this.guessArr[j])
+                } else {
+                    showWord.splice(this.word.match(showObj.guessArr[i]).index, 0, " _ ")
+                }
+            }
+        }
+    },
     wins: winTotal,
     losses: lossTotal
 }
 
 document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
-
-for (let i =0; i < showObj.guessLen(); i++) {
-    let thing = document.createElement('span')
-    thing.textContent = ' _ ' // str[i]
-    document.querySelector('#myDiv').append(thing)
-}
 
 // wins and losses 
 winTotal = wins(guesses)
@@ -53,7 +48,8 @@ document.onkeydown = ({ keyCode, key }) => {
     if (keyCode >= 65 && keyCode <= 90) {
         // save the letters pressed
         showObj.guessArr.push(key)
-        // showObj.showWordArr()
+
+        showObj.showWordArr();
     }
     document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
 

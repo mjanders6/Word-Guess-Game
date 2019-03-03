@@ -16,7 +16,11 @@ let showObj = {
 
 }
 
-
+// for (let i = 0; i < showObj.guessLen(); i++) {
+//     let thing = document.createElement('span')
+//     thing.textContent = ' _ ' // str[i]
+//     document.querySelector('#myDiv').append(thing)
+// }
 
 // // document.getElementById("myTest").innerHTML = res
 // document.onkeydown = ({ key }) => {
