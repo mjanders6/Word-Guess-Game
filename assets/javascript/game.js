@@ -56,6 +56,4 @@ document.onkeydown = ({ keyCode, key }) => {
     document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
     document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.join(" ");
 
-
-
 };
