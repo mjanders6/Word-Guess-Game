@@ -10,9 +10,13 @@ let showWord = []
 // create a constant to sum the 1's for the correct guesses
 const wins = ga => ga.reduce((a, b) => a + b, 0)
 
+for (let i = 0; i < word.length; i++) {
+    showWord[i] = " _ "
+}
+
 // Object to hold the information
 let showObj = {
-    word: word,
+    word: word.split(""),
     guessLen() {
         // length of word
         return this.word.length
@@ -22,17 +26,13 @@ let showObj = {
         // guesses left
         return this.guessLen() - this.guessArr.length
     },
-    showWordArr() {
-        // trying to get this to show the word...
-        for (let j = 0; j < this.guessArr.length; j++) {
-            for (let i = 0; i < this.guessLen(); i++) {
-                if (this.word.match(this.guessArr[j]) != null) {
-                    showWord.splice(this.word.match(showObj.guessArr[i]).index, 0, this.guessArr[j])
-                } else {
-                    showWord.splice(this.word.match(showObj.guessArr[i]).index, 0, " _ ")
-                }
+    showWordArr(event) {
+        for (let i = 0; i < this.guessArr.length; i++) {
+            for (let j = 0; j < this.word.length; j++) {
+                this.guessArr[i] === this.word[j] ? showWord[j] = this.guessArr[i] : '_'
             }
         }
+        return showWord
     },
     wins: winTotal,
     losses: lossTotal
@@ -48,13 +48,14 @@ document.onkeydown = ({ keyCode, key }) => {
     if (keyCode >= 65 && keyCode <= 90) {
         // save the letters pressed
         showObj.guessArr.push(key)
+        showObj.showWordArr(key)
 
-        showObj.showWordArr();
+
     }
     document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
+    document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr;
+    document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.toString();
 
 
 
 };
-
-

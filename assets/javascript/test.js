@@ -22,6 +22,18 @@ let showObj = {
 //     document.querySelector('#myDiv').append(thing)
 // }
 
+// for (let i = 0; i < showObj.guessLen(); i++) {
+//     if (word.indexOf("a") >= 0) {        
+//         let thing = document.createElement('span')
+//         thing.textContent = word[i]
+//         document.querySelector('#myDiv').append(thing)
+//     } else {
+//         let thing = document.createElement('span')
+//         thing.textContent = ' _ ' // str[i]
+//         document.querySelector('#myDiv').append(thing)
+//     }
+// }
+
 // // document.getElementById("myTest").innerHTML = res
 // document.onkeydown = ({ key }) => {
 //     document.getElementById("myTest").innerHTML = key
