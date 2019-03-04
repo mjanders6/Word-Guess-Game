@@ -53,8 +53,8 @@ document.onkeydown = ({ keyCode, key }) => {
 
     }
     document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
-    document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr;
-    document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.toString();
+    document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
+    document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.join(" ");
 
 
 
