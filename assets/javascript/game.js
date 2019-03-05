@@ -16,10 +16,11 @@ for (let i = 0; i < word.length; i++) {
 // Object to hold the information
 let showObj = {
     word: word.split(""),
-    wordDash () {
+    wordDash() {
         for (let i = 0; i < word.length; i++) {
             showWord[i] = " _ "
         }
+        return showWord
     },
     guessLen() {
         // length of word
@@ -29,12 +30,7 @@ let showObj = {
     guessLeft() {
         // guesses left
         let gsLeft = this.guessLen() - this.guessArr.length
-        if (gsLeft === 0) {
-            this.guessArr = []
-            return gsLeft
-        } else {
-            return gsLeft
-        }
+        return gsLeft
     },
     showWordArr(event) {
         for (let i = 0; i < this.guessArr.length; i++) {
@@ -57,6 +53,13 @@ let showObj = {
             return
         }
         return winSum(winLossCount)
+    },
+    clearPage() {
+        document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
+        document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + '';
+        this.guessArr = []
+        this.wordDash()
+        document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + '';
     }
 }
 
@@ -67,13 +70,16 @@ document.onkeydown = ({ keyCode, key }) => {
     if (keyCode >= 65 && keyCode <= 90) {
         // save the letters pressed
         showObj.guessArr.push(key)
-        showObj.showWordArr(key)
-        showObj.wins()
-
     }
-    document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
-    document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
-    document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.join(" ");
-    document.getElementById("wins").innerHTML = 'Wins: ' + winSum(winLossCount);
-
+    showObj.showWordArr(key)
+    showObj.wins()
+    
+    if (showObj.guessLeft() > 0) {
+        document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
+        document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
+        document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.join(" ");
+        document.getElementById("wins").innerHTML = 'Wins: ' + winSum(winLossCount);
+    } else {
+        showObj.clearPage()
+    }
 };
