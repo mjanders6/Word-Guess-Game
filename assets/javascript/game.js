@@ -3,12 +3,11 @@ let word = 'anderson'
 const numGuesses = word.length
 let guesses = []
 let guessesLeft
-let winTotal = []
-let lossTotal = []
+let winLossCount = []
 let showWord = []
 
 // create a constant to sum the 1's for the correct guesses
-const wins = ga => ga.reduce((a, b) => a + b, 0)
+const winSum = ga => ga.reduce((a, b) => a + b, 0)
 
 for (let i = 0; i < word.length; i++) {
     showWord[i] = " _ "
@@ -17,6 +16,11 @@ for (let i = 0; i < word.length; i++) {
 // Object to hold the information
 let showObj = {
     word: word.split(""),
+    wordDash () {
+        for (let i = 0; i < word.length; i++) {
+            showWord[i] = " _ "
+        }
+    },
     guessLen() {
         // length of word
         return this.word.length
@@ -24,7 +28,13 @@ let showObj = {
     guessArr: guesses,
     guessLeft() {
         // guesses left
-        return this.guessLen() - this.guessArr.length
+        let gsLeft = this.guessLen() - this.guessArr.length
+        if (gsLeft === 0) {
+            this.guessArr = []
+            return gsLeft
+        } else {
+            return gsLeft
+        }
     },
     showWordArr(event) {
         for (let i = 0; i < this.guessArr.length; i++) {
@@ -34,26 +44,36 @@ let showObj = {
         }
         return showWord
     },
-    wins: winTotal,
-    losses: lossTotal
+    wins() {
+        if (this.guessLeft() === 0) {
+            if (showWord.indexOf(" _ ") === -1) {
+                console.log('you won');
+                winLossCount.push(1);
+            } else {
+                console.log('you lost');
+                winLossCount.push(0);
+            }
+        } else {
+            return
+        }
+        return winSum(winLossCount)
+    }
 }
 
 document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
 
-// wins and losses 
-winTotal = wins(guesses)
-lossTotal = guesses.length - winTotal
 
 document.onkeydown = ({ keyCode, key }) => {
     if (keyCode >= 65 && keyCode <= 90) {
         // save the letters pressed
         showObj.guessArr.push(key)
         showObj.showWordArr(key)
-
+        showObj.wins()
 
     }
     document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
     document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
     document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + showWord.join(" ");
+    document.getElementById("wins").innerHTML = 'Wins: ' + winSum(winLossCount);
 
 };
