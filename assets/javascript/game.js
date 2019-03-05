@@ -6,6 +6,7 @@ let guessesLeft
 let winLossCount = []
 let showWord = []
 
+
 // create a constant to sum the 1's for the correct guesses
 const winSum = ga => ga.reduce((a, b) => a + b, 0)
 
@@ -62,6 +63,7 @@ let showObj = {
         this.wordDash()
         document.getElementById("lettersShow").innerHTML = 'Correct Letters: ' + '';
         document.getElementById("wins").innerHTML = 'Wins: ' + winSum(winLossCount)
+        this.newWord()
     }
 }
 
@@ -74,7 +76,7 @@ document.onkeydown = ({ keyCode, key }) => {
 
     showObj.showWordArr(key)
     showObj.wins()
-    
+
     if (showObj.guessLeft() > 0) {
         document.getElementById("guessLeft").innerHTML = 'Guesses Left: ' + showObj.guessLeft();
         document.getElementById("lettersGuessed").innerHTML = 'Letters Guessed: ' + showObj.guessArr.join(", ");
